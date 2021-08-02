@@ -1,0 +1,77 @@
+<h2>Dynamics Forms</h2>
+<hr />
+
+<form (ngSubmit)="save()" #myDynamicForm="ngForm" autocomplete="off">
+  <div class="mb-3 row">
+    <label class="col-sm-3 col-form-label" for="name">Name</label>
+    <div class="col-sm-9">
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Name"
+        [ngModel]="people.name"
+        name="name"
+        minlength="3"
+        required
+      />
+      <span class="form-text text-danger m-auto" *ngIf="validationName()">
+        It must be 3 letters
+      </span>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="mb-3 row">
+    <label class="col-sm-3 col-form-label" for="name">Add</label>
+    <div class="col-9">
+      <div class="input-group">
+        <input class="form-control" 
+                type="text" 
+                placeholder="Add" 
+                [(ngModel)]="newGame"
+                name="newGame"
+                (keyup.enter)="add()"/>
+        <button type="button" 
+                class="btn btn-outline-dark"
+                (click)="add()">
+            Add
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3 row">
+    <label class="col-sm-3 col-form-label" for="name">Favorites</label>
+    <div class="col-sm-9">
+      <div
+        class="input-group mb-1"
+        *ngFor="let favorite of people.favorites; let i = index"
+      >
+        <input
+          class="form-control"
+          [ngModel]="favorite.game"
+          name="favorite_{{ i }}"
+        />
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          (click)="delete(i)">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <button
+        class="btn btn-dark float-end"
+        (click)="save()"
+        [disabled]="myDynamicForm.invalid"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</form>
