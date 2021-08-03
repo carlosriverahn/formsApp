@@ -34,7 +34,7 @@ export class SidemenuComponent {
     },
     {
       text: 'Dinamics',
-      route: './reactive/dinamics'
+      route: './reactive/dynamics'
     },
     {
       text: 'Switches',

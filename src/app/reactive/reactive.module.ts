@@ -3,19 +3,21 @@ import { CommonModule } from '@angular/common';
 
 import { ReactiveRoutingModule } from './reactive-routing.module';
 import { BasicsComponent } from './basics/basics.component';
-import { DinamicsComponent } from './dinamics/dinamics.component';
+import { DynamicsComponent } from './dynamics/dynamics.component';
 import { SwitchesComponent } from './switches/switches.component';
+import {  ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     BasicsComponent,
-    DinamicsComponent,
+    DynamicsComponent,
     SwitchesComponent
   ],
   imports: [
     CommonModule,
-    ReactiveRoutingModule
+    ReactiveRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class ReactiveModule { }

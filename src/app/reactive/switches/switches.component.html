@@ -1,1 +1,81 @@
-<p>switches works!</p>
+<h2> Switches Reactive Form </h2>
+
+<div class="container">
+  <form (ngSubmit)=save() [formGroup]="myForm">
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label" for="Sex"> Gender </label>
+      <div class="col-sm-9">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            value="M"
+            id="Male"
+            formControlName="gender"/>
+          <label class="form-check-label" for="Male"> Male </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            value="F"
+            id="female"
+            formControlName="gender"/>
+          <label class="form-check-label" for="female"> Female </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label" for="Sex"> notifications </label>
+      <div class="col-sm-9 mt-2">
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="flexSwitchCheckDefault"
+            formControlName="notifications"/>
+          <label class="form-check-label" for="flexSwitchCheckDefault">
+            I want to receive notifications
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label"> </label>
+      <div class="col-sm-9 col-form-label">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="flexCheckDefault"
+            formControlName="contract"/>
+          <label class="form-check-label" for="flexCheckDefault">
+            Terms and Conditions
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <button
+          class="btn btn-outline-dark float-end"
+          type="submit">
+          Save
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<h5>Form Value</h5>
+
+<pre>{{ myForm.value | json }}</pre>
+
+<pre>{{ people | json }}</pre>
+
+<h5>Form Valid</h5>
+<pre>{{ myForm.valid }}</pre>
+

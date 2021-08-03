@@ -1,7 +1,7 @@
-<h2>Dynamics Template Forms</h2>
+<h2>Dynamics reactive Forms</h2>
 <hr />
 
-<form (ngSubmit)="save()" #myDynamicForm="ngForm" autocomplete="off">
+<form (ngSubmit)="save()" autocomplete="off" [formGroup]='myForm'>
   <div class="mb-3 row">
     <label class="col-sm-3 col-form-label" for="name">Name</label>
     <div class="col-sm-9">
@@ -9,12 +9,10 @@
         class="form-control"
         type="text"
         placeholder="Name"
-        [ngModel]="people.name"
-        name="name"
-        minlength="3"
-        required
+        formControlName="name"
       />
-      <span class="form-text text-danger m-auto" *ngIf="validationName()">
+      <span class="form-text text-danger m-auto"
+            *ngIf="fieldsErrorsValidations('name')">
         It must be 3 letters
       </span>
     </div>
@@ -28,13 +26,12 @@
       <div class="input-group">
         <input class="form-control" 
                 type="text" 
-                placeholder="Add" 
-                [(ngModel)]="newGame"
-                name="newGame"
-                (keyup.enter)="add()"/>
+                placeholder="Add"
+                [formControl]="addGame" 
+                (keyup.enter)="addNewGame()"/>
         <button type="button" 
                 class="btn btn-outline-dark"
-                (click)="add()">
+                (click)="addNewGame()">
             Add
         </button>
       </div>
@@ -43,35 +40,43 @@
 
   <div class="mb-3 row">
     <label class="col-sm-3 col-form-label" for="name">Favorites</label>
-    <div class="col-sm-9">
-      <div
-        class="input-group mb-1"
-        *ngFor="let favorite of people.favorites; let i = index"
-      >
-        <input
-          class="form-control"
-          [ngModel]="favorite.game"
-          name="favorite_{{ i }}"
-        />
+
+    <div class="col-sm-9" formArrayName="favorites">
+      <div class="input-group mb-1"          
+          *ngFor="let favorite of favoritesArr.controls; let i = index">
+
+        <input class="form-control"
+              [formControlName]="i"/>
+
         <button
           type="button"
           class="btn btn-outline-danger"
-          (click)="delete(i)">
+          (click)="delete(i)"> 
           Delete
         </button>
+
       </div>
     </div>
+
   </div>
 
   <div class="row">
     <div class="col-sm-12">
       <button
         class="btn btn-dark float-end"
-        (click)="save()"
-        [disabled]="myDynamicForm.invalid"
-      >
+        type="submit">
         Save
       </button>
     </div>
   </div>
 </form>
+
+
+<span>Valid</span>
+<pre>{{ myForm.valid }}</pre>
+<br>
+<span>Values Form Group</span>
+<pre>{{ myForm.value | json }}</pre>
+<br>
+<span>Values addGame Formd</span>
+<pre>{{ addGame.value | json }}</pre>
