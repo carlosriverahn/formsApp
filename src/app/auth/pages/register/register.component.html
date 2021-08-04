@@ -1,0 +1,101 @@
+<h2>Reactive Validations</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <form [formGroup]="formRegister" ngSubmit="save()">
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label" for="">Full name</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                            class="form-control"
+                            placeholder="Full name"
+                            formControlName="name">
+                    <span class="form-text text-danger"
+                            *ngIf="fieldsErrorsValidations('name')">
+                        must be the full name
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label" for="">Email</label>
+                <div class="col-sm-9">
+                    <input type="email"
+                            class="form-control"
+                            placeholder="Email"
+                            formControlName="email">
+                    <span class="form-text text-danger"
+                        *ngIf="fieldsErrorsValidations('email')">
+                        {{ emailErrorMsg }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label" for="">Username</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                            class="form-control"
+                            placeholder="Username"
+                            formControlName="username">
+                    <span class="form-text text-danger"
+                        *ngIf="fieldsErrorsValidations('username')">                     
+                        choose a different user.
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label" for="">Password</label>
+                <div class="col-sm-9">
+                    <input type="password"
+                            class="form-control"
+                            placeholder="Password"
+                            formControlName="password1">
+                    <span class="form-text text-danger"
+                        *ngIf="fieldsErrorsValidations('password1')">
+                        it must have a minimum of 6 characters
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label" for="">Repeat password</label>
+                <div class="col-sm-9">
+                    <input type="password"
+                            class="form-control"
+                            placeholder="Repeat password"
+                            formControlName="password2">
+                    <span class="form-text text-danger"
+                        *ngIf="fieldsErrorsValidations('password2')">
+                        passwords must be the same
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-outline-dark float-end" 
+                            type="submit"
+                            [disabled]="formRegister.pending"
+                            (click)="save()">
+                        Save
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<br>
+
+<h5>Form Valid: {{ formRegister.valid }}</h5>
+
+<h5>Form Status: {{ formRegister.status }}</h5>
+
+<h5>Form Pending: {{ formRegister.pending }}</h5>
+
+<h5>Form email Validation: {{ formRegister.controls.email.errors | json }}</h5>

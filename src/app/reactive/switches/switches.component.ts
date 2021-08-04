@@ -31,7 +31,9 @@ export class SwitchesComponent implements OnInit {
     this.myForm.valueChanges.subscribe(({contract, ...rest}) => {
       this.people = rest;
     })
-    this.myForm.get('contract')?.valueChanges.subscribe(console.log)
+
+    //Observable for a field of the form
+    this.myForm.get('contract')?.valueChanges.subscribe(console.log);
 
   }
 
@@ -39,9 +41,9 @@ export class SwitchesComponent implements OnInit {
     if(this.myForm.invalid){
       return;
     }
-    console.log("Hola");
 
 
+    console.log(this.myForm.value);
     this.myForm.reset();
   }
 
